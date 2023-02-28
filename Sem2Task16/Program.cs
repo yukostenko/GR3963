@@ -9,7 +9,7 @@ int numB = int.Parse(Console.ReadLine() ?? "0");
 
 void SqeaTest(int num1, int num2)
 {
-if (num1 = num2*num2)
+if (num1 == num2*num2)
 {
     Console.WriteLine($"Число {num1} является квадратом числа {num2}");
 }
