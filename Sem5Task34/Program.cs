@@ -41,19 +41,6 @@ int CountEvenElement(int[] arr)
     return res;
 }
 
-// Метод поиска четных чисел в массиве
-int CountEvenElement(int[] arr)
-{
-    int res = 0;
-    for (int i = 0; i < arr.Length; i++)
-    {
-        if (arr[i] % 2 == 0)
-        {
-            res++;
-        }
-    }
-    return res;
-}
 
 int[] testArr = Gen1DArr(5, 456);
 Print1DArr(testArr);
