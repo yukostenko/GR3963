@@ -59,15 +59,19 @@ void Print2DArr(int[,] arr)
 }
 
 // Метод возврата элемента массива
-int Gen2DArrElReturn(int rowIndex, int columnIndex)
+string Gen2DArrElReturn(int[,] arr, int rowIndex, int columnIndex)
 {
-    int res = 0;
-    int elm = arr.GetLength(0)>arr.GetLength(1)? arr.GetLength(1): arr.GetLength(0);
-    for (int j = 0; j = elm; j++)
-    {
-        res = res + arr[j, j];
-    }
-    return res;
+string res = "";
+if (rowIndex < arr.GetLength(0) && columnIndex < arr.GetLength(1))
+{
+res = arr[rowIndex, columnIndex].ToString();
+}
+else
+{
+res = "Такого элемента нет!";
+}
+
+return res;
 }
 
 int row = ReadData("Введите количество строк: ");
@@ -76,3 +80,4 @@ int[,] arr2D = Gen2DArr(row, column, 10, 99);
 Print2DArr(arr2D);
 int rowIndex = ReadData("Введите позицию элемента в строке: ");
 int columnIndex = ReadData("Введите озицию элемента в столбце: ");
+Console.WriteLine(Gen2DArrElReturn(arr2D, rowIndex, columnIndex));
