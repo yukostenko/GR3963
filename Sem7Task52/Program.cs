@@ -2,77 +2,78 @@
 //Найдите среднее арифметическое элементов в каждом
 // столбце.
 
-// Метод запроса данных у пользователя
-int ReadData(string msg)
+Console.Clear();
+// Генерация двумерного массива
+int[,] Gen2DArr(int RowCount, int ColCount, int min, int max)
 {
-    Console.WriteLine(msg);
-    int res = int.Parse(Console.ReadLine() ?? "0");
-    return res;
-}
-
-// Метод выводит данные от пользователя
-void PrintData(string msg, int print)
-{
-    Console.WriteLine(msg+print);
-}
-
-// Метод генерации двумерного массива
-int[,] Gen2DArr(int countRow, int countColumn, int minValue, int maxValue)
-{
-    // Блок корректировки входных данных
-    if (minValue > maxValue)
     {
-        int buf = minValue;
-        minValue = maxValue;
-        maxValue = buf;
-    }
-    Random rnd = new Random();
-    int[,] arr = new int[countRow, countColumn];
-    for (int i = 0; i < countRow; i++)
-    {
-        for (int j = 0; j < countColumn; j++)
+        int buf;
+        if (min > max)
         {
-            arr[i, j] = rnd.Next(minValue, maxValue + 1);
+            buf = min;
+            min = max;
+            max = buf;
         }
     }
-    return arr;
+    int[,] binarray = new int[RowCount, ColCount];
+    System.Random numSintezator = new System.Random();
+    for (int i = 0; i < RowCount; i++)
+    {
+        for (int j = 0; j < ColCount; j++)
+        {
+
+            binarray[i, j] = numSintezator.Next(min, max);
+
+        }
+    }
+    return binarray;
 }
 
-// Метод печати двумерного массива
-void Print2DArr(int[,] arr)
+//Печать 2-х мерного массива
+void Print2DArry(int[,] array)
 {
-    ConsoleColor[] col = new ConsoleColor[]{ConsoleColor.Black,ConsoleColor.Blue,
-    ConsoleColor.Cyan,ConsoleColor.DarkBlue,ConsoleColor.DarkCyan,ConsoleColor.DarkGray,
-    ConsoleColor.DarkGreen,ConsoleColor.DarkMagenta,ConsoleColor.DarkRed,
-    };
-
-    for (int i = 0; i < arr.GetLength(0); i++)
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        for (int j = 0; j < arr.GetLength(1); j++)
+
+        for (int j = 0; j < array.GetLength(1); j++)
         {
-            Console.ForegroundColor = col[new Random().Next(0, 9)];
-            Console.Write(arr[i, j] + "\t");
-            Console.ResetColor();
+
+            Console.Write($"{array[i, j]}\t");
+
         }
         Console.WriteLine();
-
     }
 }
 
-// Метод определения среднего арифметического элементов в каждом столбце
-int AvrCountElm(int[,] arr)
+//Печать одномерного массива
+void Print1DArry(double[] array)
 {
-    int avr = 0;
-    for (int j = 0; j < arr.GetLength(1); j++)
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        avr = (avr + arr[j, j])/n;
+        Console.Write($"{array[i]}\t");
     }
-    return res;
+
+}
+//подсчет среднего арифметического столбцов
+double[] AverageCol(int[,] arr)
+{
+    double[] result = new double[arr.GetLength(1)];
+    for (int i = 0; i < arr.GetLength(1); i++)
+    {
+        for (int j = 0; j < arr.GetLength(0); j++)
+        {
+            result[i] += arr[j, i];
+        }
+        result[i] = Math.Round(result[i] / (arr.GetLength(0)), 2);
+    }
+
+    return result;
 }
 
-int row = ReadData("Введите количество строк: ");
-int column = ReadData("Введите количество столбцов: ");
-int[,] arr2D = Gen2DArr(row, column, 10, 99);
-Console.WriteLine("Исходный массив: ");
-Print2DArr(arr2D);
-PrintData("Среднее арифметическое элементов в каждом столбце: ", AvrCountElm(arr2D));
+int[,] array = Gen2DArr(20, 100, 6, 7);
+Console.WriteLine("Исходный массив:");
+Print2DArry(array);
+
+Console.WriteLine("Среднее арифметическое каждого столбца:");
+double[] result = AverageCol(array);
+Print1DArry(result);
