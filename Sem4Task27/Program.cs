@@ -33,7 +33,6 @@ int SumDigits(int num)
 }
 return sum;
 }
-
 int num = ReadData("Введите число: ");
 int sum = SumDigits(num);
 PrintData("Сумма цифр в числе равна: ", sum);
