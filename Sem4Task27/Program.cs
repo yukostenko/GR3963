@@ -27,11 +27,11 @@ void PrintData(string msg, int num)
 int SumDigits(int num)
 {
     int sum = 0;
-    if (int i = 0; i <= num; i++;)
+    if (int i = 0; i <= num; i++)
     {
     sum += i;
-}
-return sum;
+    }
+    return sum;
 }
 int num = ReadData("Введите число: ");
 int sum = SumDigits(num);

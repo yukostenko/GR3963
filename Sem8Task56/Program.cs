@@ -19,7 +19,7 @@ int ReadData(string msg)
 // Метод, выводящий на печать данные пользователя
 void PrintData(string res)
 {
-    Console.WriteLine(res);
+    Console.Write(res);
 }
 // Метод генерации двумерного массива
 int[,] Gen2DArr(int countRow, int countColumn, int minValue, int maxValue)
@@ -71,17 +71,20 @@ int MinRowCount(int[,] arr)
     int sum = 0;
     {
         for (int i = 0; i < arr.GetLength(0); i++)
+        {
+            sum = 0;
             for (int j = 0; j < arr.GetLength(1); j++)
-        {
-            sum = sum + arr[i, j];
+                sum += arr[i, j];
+
+            if (sum < min)
+            {
+                min = sum;
+                index = i;
+            }
         }
-        if (sum < min)
-        {
-            min = sum;
-            index = i;
-        }
+        return index + 1;
     }
-    return index;
+    return index+1;
 }
 
 int n = ReadData("Введите количество строк: ");
@@ -90,5 +93,5 @@ int[,] arr2D = Gen2DArr(n, m, 0, 99);
 Console.WriteLine("Исходный массив: ");
 Print2DArr(arr2D);
 int res = MinRowCount(arr2D);
-Console.WriteLine("Строка с наименьней суммой элементов:");
+Console.WriteLine("Строка с наименьшей суммой элементов:");
 PrintData($"{res}");
